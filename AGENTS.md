@@ -52,7 +52,8 @@ The `lamia-pedagogy` package provides:
 
 | Macro | Description & Usage |
 | :--- | :--- |
-| `\ficheHeader{Durée}{Date}{Niveau}{Année}` | Standard metadata header bar with duration, date, level, and school year. |
+| `\ficheHeader{Durée}{Date}{Niveau}{Année}` | Teacher lesson plan header bar (Page 1) with duration, date, level, and school year. |
+| `\ficheEleveHeader[Niveau]` | Student worksheet header bar (Page 2) with wide write-in room for Name, Level, Class, Date. |
 | `\competenceBanner{<Icon> <Title>}` | Full-width navy title banner for the current competence/domain. |
 | `\modaliteSupportBar{Modalité}{Support}` | Compact dual banner indicating student work modality and pedagogical support material. |
 | `\badge[color]{Text}` | Rounded badge pill (colors: `primary`, `secondary`, `accent`, `emerald`, `amber`, `softred`). |
@@ -61,6 +62,10 @@ The `lamia-pedagogy` package provides:
 | `\cardOptThree{a}{b}{c}` | Standardized 3-choice horizontal QCM grid. |
 | `\cutLineH` | Dashed horizontal scissor cut line for printable student exercise slips. |
 | `\drule{width}` | Dotted fill line for student written responses. |
+
+> [!NOTE]
+> All pages automatically include a standardized teacher attribution footer:  
+> *« Enseignante : Mme Z. Lamia · Collège Dif Slami Rabeh · 2026--2027 · Page X »*
 
 ---
 
