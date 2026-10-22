@@ -1,0 +1,138 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{lamia-pedagogy}[2026/10/22 v1.0 Lamia Modern French Pedagogy Design System]
+
+% Encoding & Typography
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[french]{babel}
+\RequirePackage[scaled=0.92]{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+% Geometry & Spacing
+\RequirePackage[margin=1.1cm,top=0.9cm,bottom=0.9cm]{geometry}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2pt}
+
+% Core Packages
+\RequirePackage{graphicx}
+\RequirePackage{tabularx}
+\RequirePackage{booktabs}
+\RequirePackage{colortbl}
+\RequirePackage{array}
+\RequirePackage[most]{tcolorbox}
+\RequirePackage{fontawesome5}
+\RequirePackage{enumitem}
+\RequirePackage[table]{xcolor}
+\RequirePackage{tikz}
+
+% Graphicspath fallback
+\graphicspath{{assets/images/}{../assets/images/}{../../assets/images/}{assets/}{../assets/}{../../assets/}{images/}{../images/}}
+
+% -------------------------------------------------------------------------
+% Palette Definitions
+% -------------------------------------------------------------------------
+\definecolor{primary}{RGB}{24, 43, 73}
+\definecolor{primarylight}{RGB}{241, 245, 249}
+\definecolor{secondary}{RGB}{13, 148, 136}
+\definecolor{secondarylight}{RGB}{240, 253, 250}
+\definecolor{accent}{RGB}{217, 119, 6}
+\definecolor{accentlight}{RGB}{254, 243, 199}
+\definecolor{emerald}{RGB}{16, 185, 129}
+\definecolor{emeraldlight}{RGB}{236, 253, 245}
+\definecolor{amber}{RGB}{217, 119, 6}
+\definecolor{softred}{RGB}{225, 29, 72}
+\definecolor{softredlight}{RGB}{255, 241, 242}
+\definecolor{cardborder}{RGB}{203, 213, 225}
+\definecolor{neutraldark}{RGB}{30, 41, 59}
+\definecolor{neutrallight}{RGB}{248, 250, 252}
+
+% -------------------------------------------------------------------------
+% Pedagogical Macros & UI Components
+% -------------------------------------------------------------------------
+
+% Metadata Header Bar (Durée, Date, Niveau, Année)
+\newcommand{\ficheHeader}[4]{%
+\begin{tcolorbox}[
+  enhanced,
+  colback=primarylight,
+  colframe=primary,
+  arc=2mm,
+  leftrule=4pt,rightrule=0.6pt,toprule=0.6pt,bottomrule=0.6pt,
+  top=3pt,bottom=3pt,left=7pt,right=7pt
+]
+\begin{tabularx}{\linewidth}{@{}X r@{}}
+{\small\faClock\ \textbf{Durée :} #1 \quad \faCalendar*\ \textbf{Date :} #2} &
+{\small\faGraduationCap\ \textbf{Niveau :} #3 \quad \faSchool\ \textbf{Année scolaire :} #4}
+\end{tabularx}
+\end{tcolorbox}%
+}
+
+% Competency / Main Section Banner
+\newcommand{\competenceBanner}[1]{%
+\begin{tcolorbox}[
+  enhanced,
+  colback=primary,
+  colframe=primary,
+  coltext=white,
+  arc=2mm,
+  top=3.5pt,bottom=3.5pt,left=8pt,right=8pt,
+  boxrule=0pt
+]
+\textbf{\large #1}
+\end{tcolorbox}%
+}
+
+% Colored Pill Badge (default secondary/teal)
+\newcommand{\badge}[2][secondary]{%
+\tcbox[
+  enhanced,
+  on line,
+  colback=#1!12,
+  colframe=#1,
+  coltext=#1!85!black,
+  arc=1.5mm,
+  boxrule=0.6pt,
+  top=1.5pt,bottom=1.5pt,left=5pt,right=5pt
+]{\small\textbf{#2}}%
+}
+
+% Tickable QCM Circle
+\newcommand{\qcmCircle}{\tikz[baseline=-0.6ex]\draw[thick,gray!70!black](0,0) circle (1.5mm);\ }
+
+% QCM 2-Option Row
+\newcommand{\cardOptTwo}[2]{%
+  \par\vspace{1pt}\noindent%
+  {\scriptsize
+  \setlength{\tabcolsep}{2pt}%
+  \begin{tabular}{@{\hspace{2mm}}p{2.7cm} p{2.8cm} p{2.6cm}@{}}
+  \qcmCircle \textbf{a)} #1 & \qcmCircle \textbf{b)} #2 & \\
+  \end{tabular}%
+  }\par\vspace{2pt}%
+}
+
+% QCM 3-Option Row
+\newcommand{\cardOptThree}[3]{%
+  \par\vspace{1pt}\noindent%
+  {\scriptsize
+  \setlength{\tabcolsep}{2pt}%
+  \begin{tabular}{@{\hspace{2mm}}p{2.7cm} p{2.8cm} p{2.6cm}@{}}
+  \qcmCircle \textbf{a)} #1 & \qcmCircle \textbf{b)} #2 & \qcmCircle \textbf{c)} #3 \\
+  \end{tabular}%
+  }\par\vspace{2pt}%
+}
+
+% Horizontal Scissor Cut Line
+\newcommand{\cutLineH}{%
+\vspace{2pt}%
+\noindent\begin{tikzpicture}
+\draw[dashed,thick,gray!60] (0,0) -- (\linewidth,0);
+\node[fill=white,inner sep=3pt] at (0.5\linewidth,0) {\textcolor{gray!80}{\faCut\ \scriptsize\textit{Découper selon les pointillés}}};
+\end{tikzpicture}%
+\vspace{2pt}%
+}
+
+% Dotted writing rule fill
+\newcommand{\drule}[1]{\makebox[#1]{\dotfill}}
+
+\endinput
