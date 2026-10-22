@@ -7,18 +7,27 @@ This document summarizes the completed modernization, modular competence archite
 ## 1. What Has Been Completed
 
 1. **Audit & Inventory**:
-   - Identified and preserved original LibreOffice sources: `Remediation 1AMTG.pdf` and `verbe etre et avoir au present.pdf`.
-   - Identified 4 incoming scanned preparation documents in `new/` (`CamScanner 22-10-2026 ...`).
+   - Identified and preserved original LibreOffice sources (`Remediation 1AMTG.pdf`, `verbe etre et avoir au present.pdf`).
+   - Integrated full 29-page pedagogical binder from `new/CamScanner 22-10-2026 20.50.pdf`.
    - Cleaned build cruft (`*.aux`, `*.log`, `*.synctex.gz`, etc.).
 
 2. **Standardized Directory Structure**:
    - `sty/`: Shared LaTeX packages and pedagogical design system (`lamia-pedagogy.sty`).
-   - `assets/images/`: Centralized vector and photographic image assets.
-   - `src/1AM/`: Modular, standalone 2-page documents for each 1AM competence:
-     - `competence_01_oral.tex` : Compréhension & Expression Orales (2 pages)
-     - `competence_02_lecture.tex` : Lecture & Phonétique + Planche Vignettes Gazelle (2 pages)
-     - `competence_03_comprehension_ecrit.tex` : Compréhension de l'Écrit (2 pages)
-     - `competence_04_production_ecrite.tex` : Production Écrite + Planche Billets Lion (2 pages)
+   - `assets/images/`: Centralized vector and photographic image assets (including `etapes_lavage_mains.png`, `caries_dents.png`, `savon_bulles.png`, `lavage_gestes.png`).
+   - `src/1AM/sequence_01/`: The 8 official pedagogical sheets for **Projet 01 / Séquence 01 (L'Hygiène)**:
+     - `P01_S01_01_oral_comprehension.tex` (2 pages)
+     - `P01_S01_02_oral_production.tex` (2 pages)
+     - `P01_S01_03_lecture_hygiene.tex` (2 pages)
+     - `P01_S01_04_vocabulaire_definition.tex` (2 pages)
+     - `P01_S01_05_grammaire_relative_qui.tex` (2 pages)
+     - `P01_S01_06_conjugaison_present.tex` (2 pages)
+     - `P01_S01_07_lecture_caries_dentaires.tex` (2 pages)
+     - `P01_S01_08_production_ecrite.tex` (2 pages)
+   - `src/1AM/`: Standalone 2-page documents for each 1AM remedial competence:
+     - `competence_01_oral.tex` (2 pages)
+     - `competence_02_lecture.tex` (2 pages)
+     - `competence_03_comprehension_ecrit.tex` (2 pages)
+     - `competence_04_production_ecrite.tex` (2 pages)
    - `src/grammaire/`: Grammar and conjugation sheets (`verbe_etre_avoir.tex` — Lesson + Full-Page 8-card student memo sheet).
    - `src/templates/`: Reusable boilerplate templates for new courses (`course_template.tex` with `\modaliteSupportBar`).
    - `archive/original_pdfs/`: Safe storage for pre-refactor original files.
@@ -41,28 +50,6 @@ This document summarizes the completed modernization, modular competence archite
      - `\drule{width}` (custom dotted student answer line)
      - Automatic multi-path graphicspath resolution for images.
 
-4. **Task Checklist**:
-   - [x] **Modularize 1AM Competencies**:
-     - Split into 4 focused 2-page documents with zero duplication.
-     - Verified clean compilation into `dist/1AM/`.
-   - [x] **Template & AI Agent Playbook**:
-     - Updated `src/templates/course_template.tex` showcasing `\modaliteSupportBar`.
-     - Documented macros in `AGENTS.md`.
-   - [x] **Automated Build System & Cleanliness**:
-     - `Makefile` compiles all documents into `dist/` and routes auxiliary files to `.build_cache/`.
-     - Created comprehensive `.gitignore`.
-   - [x] **Full-Page Student Cards (*Être & Avoir*)**:
-     - Modernized Page 2 of `src/grammaire/verbe_etre_avoir.tex` into 8 large, highly readable student memo cards spanning the full A4 page.
-   - [x] **Teacher Web Portal & CI/CD**:
-     - Created `portal/generate_index.py` generating a clean, categorized web portal:
-       - 1ère Année Moyenne (1AM) with the 4 competencies
-       - Conjugaison & Grammaire
-       - Modèles Enseignant
-     - Configured `.github/workflows/deploy.yml` for automated GitHub Pages deployment.
-   - [x] **Final Cleanup & Clean Git Commits**:
-     - Removed obsolete 14-page duplicates.
-     - Kept working tree clean and synchronized.
-
 ---
 
 ## 2. Directory Layout
@@ -80,9 +67,18 @@ This document summarizes the completed modernization, modular competence archite
 │   ├── legacy_tex/                           # Remediation_1AMTG_basic.tex & pdf
 │   └── original_pdfs/                        # Remediation_1AMTG.pdf, verbe_etre_et_avoir_au_present.pdf
 ├── assets/
-│   └── images/                               # Centralized images (environement, lion, girafe, lavage, etc.)
+│   └── images/                               # Centralized images (etapes_lavage_mains, caries, lion, etc.)
 ├── dist/                                     # Pure compiled PDFs & portal (Zero duplicates)
 │   ├── 1AM/
+│   │   ├── sequence_01/                      # 8 official course sheets (2 pages each)
+│   │   │   ├── P01_S01_01_oral_comprehension.pdf
+│   │   │   ├── P01_S01_02_oral_production.pdf
+│   │   │   ├── P01_S01_03_lecture_hygiene.pdf
+│   │   │   ├── P01_S01_04_vocabulaire_definition.pdf
+│   │   │   ├── P01_S01_05_grammaire_relative_qui.pdf
+│   │   │   ├── P01_S01_06_conjugaison_present.pdf
+│   │   │   ├── P01_S01_07_lecture_caries_dentaires.pdf
+│   │   │   └── P01_S01_08_production_ecrite.pdf
 │   │   ├── competence_01_oral.pdf            # 2 pages
 │   │   ├── competence_02_lecture.pdf         # 2 pages
 │   │   ├── competence_03_comprehension_ecrit.pdf # 2 pages
@@ -91,13 +87,23 @@ This document summarizes the completed modernization, modular competence archite
 │   │   └── verbe_etre_avoir.pdf              # 2 pages (Lesson + 8 Large Student Cards)
 │   ├── templates/
 │   │   └── course_template.pdf               # 2 pages
-│   └── index.html                            # Teacher web portal
-├── new/                                      # Raw inbound teacher scans (CamScanner)
+│   └── index.html                            # Teacher web portal (14 documents)
+├── new/
+│   └── CamScanner 22-10-2026 20.50.pdf       # Raw consolidated scan
 ├── portal/
 │   ├── generate_index.py                     # Portal generator script
 │   └── index.html
 ├── src/
 │   ├── 1AM/
+│   │   ├── sequence_01/
+│   │   │   ├── P01_S01_01_oral_comprehension.tex
+│   │   │   ├── P01_S01_02_oral_production.tex
+│   │   │   ├── P01_S01_03_lecture_hygiene.tex
+│   │   │   ├── P01_S01_04_vocabulaire_definition.tex
+│   │   │   ├── P01_S01_05_grammaire_relative_qui.tex
+│   │   │   ├── P01_S01_06_conjugaison_present.tex
+│   │   │   ├── P01_S01_07_lecture_caries_dentaires.tex
+│   │   │   └── P01_S01_08_production_ecrite.tex
 │   │   ├── competence_01_oral.tex
 │   │   ├── competence_02_lecture.tex
 │   │   ├── competence_03_comprehension_ecrit.tex
@@ -115,7 +121,7 @@ This document summarizes the completed modernization, modular competence archite
 ## 3. Quick Reference Commands
 
 - `make` : Compiles all sources into `dist/` and refreshes the web portal.
-- `make 1am` : Compiles all 1AM competence documents.
+- `make 1am` : Compiles all 1AM documents.
 - `make portal` : Refreshes the HTML web portal.
 - `make clean` : Clears `.build_cache/` without touching `dist/`.
 - `make distclean` : Removes both `.build_cache/` and generated `dist/` outputs.

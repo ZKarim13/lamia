@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Generates an elegant, teacher-friendly web portal (index.html)
-categorizing documents clearly by grade level and domain.
+categorizing documents clearly by grade level, sequence, and domain.
 """
 import os
 import subprocess
@@ -30,12 +30,86 @@ def get_pdf_info(pdf_path):
 
 def get_doc_metadata(rel_path):
     stem = rel_path.stem
-    p_str = str(rel_path)
 
-    if "competence_01" in stem:
+    # SEQUENCE 01 DOCUMENTS
+    if "P01_S01_01" in stem:
         return {
-            "group": "1AM",
-            "badge": "1AM · Oral",
+            "group": "1AM_SEQ1",
+            "badge": "Séance 01 · Oral",
+            "badge_color": "bg-sky-50 text-sky-700 border-sky-200",
+            "title": "Compréhension de l'Oral : Le lavage des mains",
+            "desc": "Support d'écoute transcrit « Selon M. Pompe », découverte du thème des microbes et questionnaire des 3 écoutes méthodiques.",
+            "icon": "fa-headphones"
+        }
+    elif "P01_S01_02" in stem:
+        return {
+            "group": "1AM_SEQ1",
+            "badge": "Séance 02 · Oral",
+            "badge_color": "bg-indigo-50 text-indigo-700 border-indigo-200",
+            "title": "Production de l'Oral : Les 5 étapes du lavage",
+            "desc": "Manuel p. 10. Support iconique illustré des 5 étapes chronologiques, boîte à outils lexicale et jeu de rôle en binôme.",
+            "icon": "fa-comments"
+        }
+    elif "P01_S01_03" in stem:
+        return {
+            "group": "1AM_SEQ1",
+            "badge": "Séance 03 · Lecture",
+            "badge_color": "bg-emerald-50 text-emerald-700 border-emerald-200",
+            "title": "Compréhension de l'Écrit (01) : Gestes d'hygiène",
+            "desc": "Texte explicatif sur l'hygiène corporelle, identification des microbes, questions à choix multiples et définition du lavage.",
+            "icon": "fa-book-open"
+        }
+    elif "P01_S01_04" in stem:
+        return {
+            "group": "1AM_SEQ1",
+            "badge": "Séance 04 · Vocabulaire",
+            "badge_color": "bg-amber-50 text-amber-700 border-amber-200",
+            "title": "Vocabulaire : La Définition et la Synonymie",
+            "desc": "Procédés explicatifs essentiels en 1AM. Verbes introducteurs (être, consister à), règle des synonymes et exercices d'application.",
+            "icon": "fa-spell-check"
+        }
+    elif "P01_S01_05" in stem:
+        return {
+            "group": "1AM_SEQ1",
+            "badge": "Séance 05 · Grammaire",
+            "badge_color": "bg-blue-50 text-blue-700 border-blue-200",
+            "title": "Grammaire : La Subordonnée Relative par « qui »",
+            "desc": "Construction de la phrase complexe explicative. Identification de l'antécédent, rôle du pronom « qui » et suppression des répétitions.",
+            "icon": "fa-project-diagram"
+        }
+    elif "P01_S01_06" in stem:
+        return {
+            "group": "1AM_SEQ1",
+            "badge": "Séance 06 · Conjugaison",
+            "badge_color": "bg-rose-50 text-rose-700 border-rose-200",
+            "title": "Conjugaison : Le Présent des Verbes en -ER",
+            "desc": "Présent de l'indicatif des verbes du 1er groupe liés à l'hygiène (laver, brosser, nettoyer, rincer) et règles d'accord sujet-verbe.",
+            "icon": "fa-pencil-ruler"
+        }
+    elif "P01_S01_07" in stem:
+        return {
+            "group": "1AM_SEQ1",
+            "badge": "Séance 07 · Lecture",
+            "badge_color": "bg-teal-50 text-teal-700 border-teal-200",
+            "title": "Compréhension de l'Écrit (02) : Les caries dentaires",
+            "desc": "Manuel p. 26. Analyse scientifique des causes de la carie, tableau des 3 phases du texte explicatif et schémas dentaires.",
+            "icon": "fa-tooth"
+        }
+    elif "P01_S01_08" in stem:
+        return {
+            "group": "1AM_SEQ1",
+            "badge": "Séance 08 · Écrit",
+            "badge_color": "bg-purple-50 text-purple-700 border-purple-200",
+            "title": "Production Écrite (1er Jet) : Texte sur l'hygiène",
+            "desc": "Situation d'intégration (journal du collège). Reconstitution de phrases, grille des critères de réussite et espace d'écriture guidé.",
+            "icon": "fa-pen-fancy"
+        }
+
+    # REMEDIATION COMPETENCIES
+    elif "competence_01" in stem:
+        return {
+            "group": "1AM_REMED",
+            "badge": "Remédiation · Oral",
             "badge_color": "bg-blue-50 text-blue-700 border-blue-200",
             "title": "Compétence 01 : Compréhension & Expression Orales",
             "desc": "Fiche enseignant (thème de l'hygiène et dialogue) + Fiche élève découpable en 2 colonnes A5 avec QCM illustrés.",
@@ -43,17 +117,17 @@ def get_doc_metadata(rel_path):
         }
     elif "competence_02" in stem:
         return {
-            "group": "1AM",
-            "badge": "1AM · Lecture",
+            "group": "1AM_REMED",
+            "badge": "Remédiation · Lecture",
             "badge_color": "bg-emerald-50 text-emerald-700 border-emerald-200",
             "title": "Compétence 02 : Lecture & Phonétique",
-            "desc": "Fiche de lecture expressive (texte de la gazelle) + Planche de 15 vignettes du schéma de la gazelle à découper.",
+            "desc": "Fiche de lecture expressive (La gazelle) + Planche de 15 vignettes découpables du schéma anatomique.",
             "icon": "fa-book-open"
         }
     elif "competence_03" in stem:
         return {
-            "group": "1AM",
-            "badge": "1AM · Écrit",
+            "group": "1AM_REMED",
+            "badge": "Remédiation · Écrit",
             "badge_color": "bg-teal-50 text-teal-700 border-teal-200",
             "title": "Compétence 03 : Compréhension de l'Écrit",
             "desc": "Fiche d'analyse textuelle structurée (Phase 1 : Repérage et axes de lecture + Phase 2 : Activités de consolidation).",
@@ -61,20 +135,22 @@ def get_doc_metadata(rel_path):
         }
     elif "competence_04" in stem:
         return {
-            "group": "1AM",
-            "badge": "1AM · Production",
+            "group": "1AM_REMED",
+            "badge": "Remédiation · Production",
             "badge_color": "bg-amber-50 text-amber-700 border-amber-200",
             "title": "Compétence 04 : Production Écrite",
             "desc": "Fiche enseignant et critères d'évaluation + Planche de 6 billets de rédaction (Le lion) prêts à découper.",
             "icon": "fa-pen-fancy"
         }
+
+    # OTHER MODULES
     elif "verbe_etre_avoir" in stem:
         return {
             "group": "Grammaire",
             "badge": "Conjugaison · Grammaire",
             "badge_color": "bg-purple-50 text-purple-700 border-purple-200",
             "title": "Les Verbes ÊTRE et AVOIR au Présent",
-            "desc": "Fiche de cours avec 4 activités d'application + Planche plein format A4 de 8 grandes étiquettes mémo découpables pour les élèves.",
+            "desc": "Fiche de cours avec 4 activités + Planche plein format A4 de 8 grandes étiquettes mémo découpables pour les élèves.",
             "icon": "fa-spell-check"
         }
     elif "template" in stem:
@@ -83,7 +159,7 @@ def get_doc_metadata(rel_path):
             "badge": "Gabarit Enseignant",
             "badge_color": "bg-slate-100 text-slate-700 border-slate-300",
             "title": "Gabarit Type de Fiche Pédagogique",
-            "desc": "Modèle standard 2 pages avec en-tête métadonnées, barre modalité/support, mémo, QCM et grille d'auto-évaluation.",
+            "desc": "Modèle standard 2 pages avec métadonnées, barre modalité/support, mémo, QCM et grille d'auto-évaluation.",
             "icon": "fa-file-lines"
         }
     else:
@@ -133,12 +209,10 @@ def build_portal():
     if not DIST.exists():
         return
 
-    # Find all PDFs under dist (excluding duplicates)
-    groups = {"1AM": [], "Grammaire": [], "Templates": [], "Autres": []}
+    groups = {"1AM_SEQ1": [], "1AM_REMED": [], "Grammaire": [], "Templates": [], "Autres": []}
     
     for p in sorted(DIST.rglob("*.pdf")):
         rel = p.relative_to(DIST)
-        # Skip root aliases if any
         if p.parent == DIST:
             continue
         pages, size_str = get_pdf_info(p)
@@ -179,7 +253,7 @@ def build_portal():
             Espace Pédagogique — Madame Lamia
           </h1>
           <p class="text-sm text-slate-300 mt-1">
-            Fiches de remédiation par compétence, leçons de grammaire et supports prêts pour impression.
+            Fiches de cours officielles, livrets de remédiation et supports pédagogiques prêts à l'impression.
           </p>
         </div>
         <div class="flex items-center gap-3">
@@ -193,41 +267,57 @@ def build_portal():
   </header>
 
   <!-- Main Content -->
-  <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+  <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
 
-    <!-- Section 1 : 1ère Année Moyenne (1AM) -->
+    <!-- Section 1 : Séquence 01 (Projet 1) -->
     <section>
       <div class="flex items-center gap-3 pb-3 mb-5 border-b border-slate-200">
         <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-sky-800 text-white font-bold text-sm">
-          1AM
+          P1
         </span>
         <div>
-          <h2 class="text-lg font-bold text-slate-900">1ère Année Moyenne — Fiches de Remédiation par Compétence</h2>
-          <p class="text-xs text-slate-500">Chaque compétence est un document autonome de 2 pages (Fiche enseignant + Fiche élève découpable).</p>
+          <h2 class="text-lg font-bold text-slate-900">1ère Année Moyenne — Projet 01 / Séquence 01 : L'Hygiène Corporelle</h2>
+          <p class="text-xs text-slate-500">Les 8 séances officielles de la séquence : de la compréhension orale à la production écrite finale.</p>
         </div>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-        {render_cards(groups["1AM"])}
+        {render_cards(groups["1AM_SEQ1"])}
       </div>
     </section>
 
-    <!-- Section 2 : Conjugaison & Grammaire -->
+    <!-- Section 2 : Remédiation 1AM -->
+    <section>
+      <div class="flex items-center gap-3 pb-3 mb-5 border-b border-slate-200">
+        <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-teal-800 text-white font-bold text-sm">
+          REM
+        </span>
+        <div>
+          <h2 class="text-lg font-bold text-slate-900">1ère Année Moyenne — Livret de Remédiation par Compétence</h2>
+          <p class="text-xs text-slate-500">Documents modulaires de 2 pages pour les séances de soutien et de remédiation pédagogique.</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        {render_cards(groups["1AM_REMED"])}
+      </div>
+    </section>
+
+    <!-- Section 3 : Conjugaison & Grammaire -->
     <section>
       <div class="flex items-center gap-3 pb-3 mb-5 border-b border-slate-200">
         <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-purple-800 text-white font-bold text-sm">
           <i class="fa-solid fa-spell-check text-xs"></i>
         </span>
         <div>
-          <h2 class="text-lg font-bold text-slate-900">Grammaire & Conjugaison</h2>
-          <p class="text-xs text-slate-500">Leçons synthétiques, exercices d'application et étiquettes mémo découpables pour les élèves.</p>
+          <h2 class="text-lg font-bold text-slate-900">Grammaire & Conjugaison (Fiches Spécifiques)</h2>
+          <p class="text-xs text-slate-500">Leçons synthétiques et étiquettes mémo découpables pour les cahiers des élèves.</p>
         </div>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
         {render_cards(groups["Grammaire"])}
       </div>
     </section>
 
-    <!-- Section 3 : Modèles Pédagogiques -->
+    <!-- Section 4 : Modèles Pédagogiques -->
     <section>
       <div class="flex items-center gap-3 pb-3 mb-5 border-b border-slate-200">
         <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-slate-700 text-white font-bold text-sm">
@@ -235,10 +325,10 @@ def build_portal():
         </span>
         <div>
           <h2 class="text-lg font-bold text-slate-900">Gabarits & Modèles (Templates)</h2>
-          <p class="text-xs text-slate-500">Boîte à outils et modèle standardisé pour composer de nouvelles fiches d'activités.</p>
+          <p class="text-xs text-slate-500">Modèle standardisé pour composer de nouvelles fiches d'activités.</p>
         </div>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
         {render_cards(groups["Templates"])}
       </div>
     </section>
