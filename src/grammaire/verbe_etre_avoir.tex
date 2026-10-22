@@ -167,31 +167,33 @@
 \newpage
 
 % =========================================================================
-% PAGE 2 : Planche d'Étiquettes Mémo à Découper (12 Mini-Fiches Élèves)
+% PAGE 2 : Planche d'Étiquettes Mémo à Découper (Plein Format A4 - 8 Grandes Fiches)
 % =========================================================================
 
-\newcommand{\miniMemoCard}{%
+\newcommand{\vignetteCard}{%
 \begin{tcolorbox}[
   enhanced,
-  width=5.8cm,
   colback=white,
   colframe=cardborder,
   arc=1.5mm,
   boxrule=0.6pt,
-  top=2.5pt,bottom=2.5pt,left=2.5pt,right=2.5pt
+  top=2.5pt,bottom=2.5pt,left=2.5pt,right=2.5pt,
+  height=5.65cm
 ]
 \begin{tabularx}{\linewidth}{@{}X@{\hspace{2pt}}X@{}}
 % Boîte ÊTRE
 \begin{tcolorbox}[
+  enhanced,
   colback=secondarylight!50,
-  colframe=secondary!80!black,
-  arc=1mm,boxrule=0.5pt,
-  top=2pt,bottom=2pt,left=3pt,right=3pt
+  colframe=secondary!90!black,
+  arc=1.2mm,boxrule=0.6pt,
+  top=2pt,bottom=2pt,left=3pt,right=3pt,
+  height=5.2cm
 ]
 \centering
 {\scriptsize\textbf{le verbe \textcolor{softred}{être}}\\\textbf{au présent}\par\vspace{2pt}}
-{\tiny\setlength{\tabcolsep}{1pt}
-\begin{tabular}{l l}
+{\footnotesize
+\begin{tabular}{@{}ll@{}}
 je & \textbf{\textcolor{secondary}{suis}} \\
 tu & \textbf{\textcolor{secondary}{es}} \\
 il, elle & \textbf{\textcolor{secondary}{est}} \\
@@ -200,19 +202,23 @@ vous & \textbf{\textcolor{secondary}{êtes}} \\
 ils, elles & \textbf{\textcolor{secondary}{sont}} \\
 \end{tabular}
 }
+\par\vfill
+{\tiny\textit{\faLightbulb\ Ex : Je suis attentif.}}
 \end{tcolorbox}
 &
 % Boîte AVOIR
 \begin{tcolorbox}[
+  enhanced,
   colback=accentlight!35,
-  colframe=accent!80!black,
-  arc=1mm,boxrule=0.5pt,
-  top=2pt,bottom=2pt,left=3pt,right=3pt
+  colframe=accent!90!black,
+  arc=1.2mm,boxrule=0.6pt,
+  top=2pt,bottom=2pt,left=3pt,right=3pt,
+  height=5.2cm
 ]
 \centering
 {\scriptsize\textbf{le verbe \textcolor{softred}{avoir}}\\\textbf{au présent}\par\vspace{2pt}}
-{\tiny\setlength{\tabcolsep}{1pt}
-\begin{tabular}{l l}
+{\footnotesize
+\begin{tabular}{@{}ll@{}}
 j' & \textbf{\textcolor{accent!90!black}{ai}} \\
 tu & \textbf{\textcolor{accent!90!black}{as}} \\
 il, elle & \textbf{\textcolor{accent!90!black}{a}} \\
@@ -221,28 +227,50 @@ vous & \textbf{\textcolor{accent!90!black}{avez}} \\
 ils, elles & \textbf{\textcolor{accent!90!black}{ont}} \\
 \end{tabular}
 }
+\par\vfill
+{\tiny\textit{\faLightbulb\ Ex : J'ai un cahier.}}
 \end{tcolorbox}
 \end{tabularx}
 \end{tcolorbox}%
 }
 
 \begin{center}
-{\small\textbf{\textcolor{primary}{\faCut\ Planche d'Étiquettes Mémo Élèves : Les verbes ÊTRE et AVOIR au présent}} \quad \badge[secondary]{12 Étiquettes}}\\[2pt]
-{\scriptsize\textit{Découper selon les lignes et coller dans le cahier de cours comme mémo-règle.}}
+{\small\textbf{\textcolor{primary}{\faCut\ Planche d'Étiquettes Mémo — Les Verbes ÊTRE et AVOIR au Présent}} \quad \badge[secondary]{8 Grandes Fiches Élèves}}\\[2pt]
+{\scriptsize\textit{Découper selon les pointillés et coller dans le cahier de cours comme mémo-règle.}}
 \end{center}
+\vspace{-4pt}
 
-\vspace{1pt}
-
-% Grille 3x4 avec découpes
-\noindent\centering
-\begin{tabular}{@{}c@{\hspace{4pt}}|@{\hspace{4pt}}c@{\hspace{4pt}}|@{\hspace{4pt}}c@{}}
-\miniMemoCard & \miniMemoCard & \miniMemoCard \\
-\hline
-\miniMemoCard & \miniMemoCard & \miniMemoCard \\
-\hline
-\miniMemoCard & \miniMemoCard & \miniMemoCard \\
-\hline
-\miniMemoCard & \miniMemoCard & \miniMemoCard \\
-\end{tabular}
+\noindent
+\begin{minipage}[t]{0.488\textwidth}
+\vignetteCard
+\vspace{-3pt}
+\cutLineH
+\vspace{-3pt}
+\vignetteCard
+\vspace{-3pt}
+\cutLineH
+\vspace{-3pt}
+\vignetteCard
+\vspace{-3pt}
+\cutLineH
+\vspace{-3pt}
+\vignetteCard
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.488\textwidth}
+\vignetteCard
+\vspace{-3pt}
+\cutLineH
+\vspace{-3pt}
+\vignetteCard
+\vspace{-3pt}
+\cutLineH
+\vspace{-3pt}
+\vignetteCard
+\vspace{-3pt}
+\cutLineH
+\vspace{-3pt}
+\vignetteCard
+\end{minipage}
 
 \end{document}

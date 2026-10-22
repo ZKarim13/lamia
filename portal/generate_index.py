@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 """
-Generates a modern, elegant web portal index.html listing all compiled PDFs in dist/
+Generates an elegant, teacher-friendly web portal (index.html)
+categorizing documents clearly by grade level and domain.
 """
 import os
 import subprocess
-import json
-import shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -24,97 +23,132 @@ def get_pdf_info(pdf_path):
         pass
     size_bytes = pdf_path.stat().st_size
     if size_bytes < 1024 * 1024:
-        size_str = f"{size_bytes / 1024:.1f} Ko"
+        size_str = f"{size_bytes / 1024:.0f} Ko"
     else:
         size_str = f"{size_bytes / (1024 * 1024):.2f} Mo"
     return pages, size_str
 
-def get_meta(rel_path):
+def get_doc_metadata(rel_path):
     stem = rel_path.stem
-    if "1AM" in str(rel_path) or "remediation" in stem:
-        category = "1AM — Remédiation"
-        title = "Livret de Remédiation Pédagogique (1AM)"
-        desc = "Cahier complet de remédiation : 4 compétences disciplinaires, 14 fiches modernes prêtes à l'impression."
-        icon = "fa-book"
-        badge_color = "bg-blue-100 text-blue-800 border-blue-200"
+    p_str = str(rel_path)
+
+    if "competence_01" in stem:
+        return {
+            "group": "1AM",
+            "badge": "1AM · Oral",
+            "badge_color": "bg-blue-50 text-blue-700 border-blue-200",
+            "title": "Compétence 01 : Compréhension & Expression Orales",
+            "desc": "Fiche enseignant (thème de l'hygiène et dialogue) + Fiche élève découpable en 2 colonnes A5 avec QCM illustrés.",
+            "icon": "fa-headphones"
+        }
+    elif "competence_02" in stem:
+        return {
+            "group": "1AM",
+            "badge": "1AM · Lecture",
+            "badge_color": "bg-emerald-50 text-emerald-700 border-emerald-200",
+            "title": "Compétence 02 : Lecture & Phonétique",
+            "desc": "Fiche de lecture expressive (texte de la gazelle) + Planche de 15 vignettes du schéma de la gazelle à découper.",
+            "icon": "fa-book-open"
+        }
+    elif "competence_03" in stem:
+        return {
+            "group": "1AM",
+            "badge": "1AM · Écrit",
+            "badge_color": "bg-teal-50 text-teal-700 border-teal-200",
+            "title": "Compétence 03 : Compréhension de l'Écrit",
+            "desc": "Fiche d'analyse textuelle structurée (Phase 1 : Repérage et axes de lecture + Phase 2 : Activités de consolidation).",
+            "icon": "fa-book-reader"
+        }
+    elif "competence_04" in stem:
+        return {
+            "group": "1AM",
+            "badge": "1AM · Production",
+            "badge_color": "bg-amber-50 text-amber-700 border-amber-200",
+            "title": "Compétence 04 : Production Écrite",
+            "desc": "Fiche enseignant et critères d'évaluation + Planche de 6 billets de rédaction (Le lion) prêts à découper.",
+            "icon": "fa-pen-fancy"
+        }
     elif "verbe_etre_avoir" in stem:
-        category = "Grammaire & Conjugaison"
-        title = "Les Verbes ÊTRE et AVOIR au Présent"
-        desc = "Fiche pédagogique complète avec activités d'entraînement + planche de 12 étiquettes mémo découpables pour les élèves."
-        icon = "fa-spell-check"
-        badge_color = "bg-teal-100 text-teal-800 border-teal-200"
+        return {
+            "group": "Grammaire",
+            "badge": "Conjugaison · Grammaire",
+            "badge_color": "bg-purple-50 text-purple-700 border-purple-200",
+            "title": "Les Verbes ÊTRE et AVOIR au Présent",
+            "desc": "Fiche de cours avec 4 activités d'application + Planche plein format A4 de 8 grandes étiquettes mémo découpables pour les élèves.",
+            "icon": "fa-spell-check"
+        }
     elif "template" in stem:
-        category = "Modèle Reutilisable"
-        title = "Gabarit Pédagogique Type (Template)"
-        desc = "Modèle vierge structuré de 2 pages avec tous les composants (objectifs, activités, QCM, auto-évaluation)."
-        icon = "fa-file-signature"
-        badge_color = "bg-amber-100 text-amber-800 border-amber-200"
+        return {
+            "group": "Templates",
+            "badge": "Gabarit Enseignant",
+            "badge_color": "bg-slate-100 text-slate-700 border-slate-300",
+            "title": "Gabarit Type de Fiche Pédagogique",
+            "desc": "Modèle standard 2 pages avec en-tête métadonnées, barre modalité/support, mémo, QCM et grille d'auto-évaluation.",
+            "icon": "fa-file-lines"
+        }
     else:
-        category = "Ressource Pédagogique"
-        title = stem.replace("_", " ").title()
-        desc = "Document pédagogique officiel au format PDF haute fidélité."
-        icon = "fa-file-pdf"
-        badge_color = "bg-slate-100 text-slate-800 border-slate-200"
-    return category, title, desc, icon, badge_color
+        return {
+            "group": "Autres",
+            "badge": "Document",
+            "badge_color": "bg-slate-50 text-slate-700 border-slate-200",
+            "title": stem.replace("_", " ").title(),
+            "desc": "Document pédagogique prêt pour l'impression.",
+            "icon": "fa-file-pdf"
+        }
 
-def build_portal():
-    if not DIST.exists():
-        print("dist/ directory does not exist.")
-        return
-
-    # Find all PDFs under dist
-    pdfs = []
-    seen_names = set()
-    for p in sorted(DIST.rglob("*.pdf")):
-        # Skip duplicates like 1AM/remediation_1am.pdf if 1AM_remediation.pdf is primary
-        rel = p.relative_to(DIST)
-        if p.name in seen_names and ("remediation_1am.pdf" in p.name and "1AM_remediation.pdf" in seen_names):
-            continue
-        pages, size_str = get_pdf_info(p)
-        cat, title, desc, icon, badge_color = get_meta(rel)
-        seen_names.add(p.name)
-        pdfs.append({
-            "path": str(rel),
-            "filename": p.name,
-            "title": title,
-            "category": cat,
-            "desc": desc,
-            "pages": pages,
-            "size": size_str,
-            "icon": icon,
-            "badge_color": badge_color
-        })
-
-    cards_html = ""
-    for item in pdfs:
-        cards_html += f"""
-        <div class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-200 border border-slate-200/80 flex flex-col justify-between group">
+def render_cards(docs):
+    html = ""
+    for d in docs:
+        html += f"""
+        <div class="bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-all duration-200 border border-slate-200 flex flex-col justify-between group">
           <div>
-            <div class="flex items-center justify-between gap-2 mb-3">
-              <span class="inline-flex items-center text-xs font-semibold px-2.5 py-1 rounded-full border {item['badge_color']}">
-                {item['category']}
+            <div class="flex items-center justify-between gap-2 mb-2.5">
+              <span class="inline-flex items-center text-xs font-semibold px-2.5 py-0.5 rounded-full border {d['badge_color']}">
+                {d['badge']}
               </span>
-              <span class="text-xs font-medium text-slate-400">
-                <i class="fa-regular fa-file-lines mr-1"></i>{item['pages']} page{'s' if item['pages'] > 1 else ''} · {item['size']}
+              <span class="text-xs text-slate-400 font-medium">
+                <i class="fa-regular fa-file-pdf mr-1"></i>{d['pages']} p. · {d['size']}
               </span>
             </div>
-            <h3 class="text-lg font-bold text-slate-900 group-hover:text-sky-700 transition-colors mb-2">
-              {item['title']}
-            </h3>
-            <p class="text-sm text-slate-600 line-clamp-3 mb-4">
-              {item['desc']}
+            <h4 class="text-base font-bold text-slate-900 group-hover:text-sky-800 transition-colors mb-2 leading-snug">
+              {d['title']}
+            </h4>
+            <p class="text-xs text-slate-600 leading-relaxed mb-4">
+              {d['desc']}
             </p>
           </div>
-          <div class="pt-4 border-t border-slate-100 flex items-center gap-3">
-            <a href="{item['path']}" target="_blank" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-sky-800 text-white text-sm font-semibold hover:bg-sky-900 transition-colors shadow-sm">
-              <i class="fa-solid fa-eye text-xs"></i> Consulter
+          <div class="pt-3 border-t border-slate-100 flex items-center gap-2">
+            <a href="{d['path']}" target="_blank" class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-sky-800 text-white text-xs font-semibold hover:bg-sky-900 transition-colors shadow-sm">
+              <i class="fa-solid fa-eye text-[11px]"></i> Consulter
             </a>
-            <a href="{item['path']}" download class="inline-flex items-center justify-center p-2.5 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-colors" title="Télécharger">
-              <i class="fa-solid fa-download"></i>
+            <a href="{d['path']}" download class="inline-flex items-center justify-center p-2 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" title="Télécharger">
+              <i class="fa-solid fa-download text-xs"></i>
             </a>
           </div>
         </div>
         """
+    return html
+
+def build_portal():
+    if not DIST.exists():
+        return
+
+    # Find all PDFs under dist (excluding duplicates)
+    groups = {"1AM": [], "Grammaire": [], "Templates": [], "Autres": []}
+    
+    for p in sorted(DIST.rglob("*.pdf")):
+        rel = p.relative_to(DIST)
+        # Skip root aliases if any
+        if p.parent == DIST:
+            continue
+        pages, size_str = get_pdf_info(p)
+        meta = get_doc_metadata(rel)
+        meta["path"] = str(rel)
+        meta["pages"] = pages
+        meta["size"] = size_str
+        groups[meta["group"]].append(meta)
+
+    total_docs = sum(len(v) for v in groups.values())
 
     html = f"""<!DOCTYPE html>
 <html lang="fr" class="h-full bg-slate-50">
@@ -135,54 +169,86 @@ def build_portal():
 
   <!-- Header Banner -->
   <header class="bg-gradient-to-r from-sky-950 via-slate-900 to-indigo-950 text-white border-b border-sky-900/50">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-7 sm:py-9">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-400/20 text-sky-300 text-xs font-semibold mb-3">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-400/20 text-sky-300 text-xs font-semibold mb-2.5">
             <i class="fa-solid fa-feather-pointed"></i> Enseignement du Français · Année Scolaire 2026-2027
           </div>
           <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
             Espace Pédagogique — Madame Lamia
           </h1>
-          <p class="text-sm sm:text-base text-slate-300 mt-1 max-w-2xl">
-            Référentiel des livrets de remédiation, fiches de langue et supports pédagogiques modernisés au format haute fidélité.
+          <p class="text-sm text-slate-300 mt-1">
+            Fiches de remédiation par compétence, leçons de grammaire et supports prêts pour impression.
           </p>
         </div>
         <div class="flex items-center gap-3">
-          <div class="bg-white/10 backdrop-blur-md px-4 py-2.5 rounded-2xl border border-white/10 text-center">
-            <div class="text-xl font-extrabold text-white">{len(pdfs)}</div>
-            <div class="text-[11px] font-medium text-sky-200 uppercase tracking-wider">Documents</div>
+          <div class="bg-white/10 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10 text-center">
+            <div class="text-xl font-extrabold text-white">{total_docs}</div>
+            <div class="text-[10px] font-medium text-sky-200 uppercase tracking-wider">Fiches Prêtes</div>
           </div>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- Main Content Grid -->
-  <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
-    <!-- Action Bar -->
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-      <div>
-        <h2 class="text-xl font-bold text-slate-900">Catalogue des Documents</h2>
-        <p class="text-sm text-slate-500">Tous les fichiers sont compilés en PDF vectoriel prêt pour l'impression ou la projection.</p>
-      </div>
-      <div class="flex items-center gap-2">
-        <span class="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-full">
-          <i class="fa-solid fa-circle-check text-[10px]"></i> Version TeX Live 2026 Validée
-        </span>
-      </div>
-    </div>
+  <!-- Main Content -->
+  <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
 
-    <!-- Cards Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {cards_html}
-    </div>
+    <!-- Section 1 : 1ère Année Moyenne (1AM) -->
+    <section>
+      <div class="flex items-center gap-3 pb-3 mb-5 border-b border-slate-200">
+        <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-sky-800 text-white font-bold text-sm">
+          1AM
+        </span>
+        <div>
+          <h2 class="text-lg font-bold text-slate-900">1ère Année Moyenne — Fiches de Remédiation par Compétence</h2>
+          <p class="text-xs text-slate-500">Chaque compétence est un document autonome de 2 pages (Fiche enseignant + Fiche élève découpable).</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        {render_cards(groups["1AM"])}
+      </div>
+    </section>
+
+    <!-- Section 2 : Conjugaison & Grammaire -->
+    <section>
+      <div class="flex items-center gap-3 pb-3 mb-5 border-b border-slate-200">
+        <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-purple-800 text-white font-bold text-sm">
+          <i class="fa-solid fa-spell-check text-xs"></i>
+        </span>
+        <div>
+          <h2 class="text-lg font-bold text-slate-900">Grammaire & Conjugaison</h2>
+          <p class="text-xs text-slate-500">Leçons synthétiques, exercices d'application et étiquettes mémo découpables pour les élèves.</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {render_cards(groups["Grammaire"])}
+      </div>
+    </section>
+
+    <!-- Section 3 : Modèles Pédagogiques -->
+    <section>
+      <div class="flex items-center gap-3 pb-3 mb-5 border-b border-slate-200">
+        <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-slate-700 text-white font-bold text-sm">
+          <i class="fa-solid fa-shapes text-xs"></i>
+        </span>
+        <div>
+          <h2 class="text-lg font-bold text-slate-900">Gabarits & Modèles (Templates)</h2>
+          <p class="text-xs text-slate-500">Boîte à outils et modèle standardisé pour composer de nouvelles fiches d'activités.</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {render_cards(groups["Templates"])}
+      </div>
+    </section>
+
   </main>
 
   <!-- Footer -->
-  <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
+  <footer class="bg-white border-t border-slate-200 py-5 text-center text-xs text-slate-500">
     <div class="max-w-6xl mx-auto px-4">
-      <p>Système de Publication Pédagogique Lamia · LaTeX & Lamia-Pedagogy Design System · Généré automatiquement</p>
+      <p>Système de Publication Pédagogique Lamia · LaTeX & Lamia-Pedagogy Design System · Mis à jour automatiquement</p>
     </div>
   </footer>
 
@@ -195,7 +261,7 @@ def build_portal():
         f.write(html)
     with open(dist_index, "w", encoding="utf-8") as f:
         f.write(html)
-    print(f"Generated {portal_index} and {dist_index} with {len(pdfs)} documents.")
+    print(f"Generated {portal_index} and {dist_index} with {total_docs} documents.")
 
 if __name__ == "__main__":
     build_portal()

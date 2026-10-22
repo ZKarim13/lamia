@@ -83,6 +83,21 @@
 \end{tcolorbox}%
 }
 
+% Modality & Support Metadata Bar
+\newcommand{\modaliteSupportBar}[2]{%
+\begin{tcolorbox}[
+  enhanced,
+  colback=primarylight,
+  colframe=secondary,
+  arc=1.5mm,leftrule=3.5pt,rightrule=0.6pt,toprule=0.6pt,bottomrule=0.6pt,
+  top=2.5pt,bottom=2.5pt,left=8pt,right=8pt
+]
+{\small
+\textbf{\faUsers\ Modalité :} #1 \hfill \textbf{\faChalkboard\ Support :} #2
+}
+\end{tcolorbox}%
+}
+
 % Colored Pill Badge (default secondary/teal)
 \newcommand{\badge}[2][secondary]{%
 \tcbox[

@@ -17,162 +17,248 @@
 
   <!-- Header Banner -->
   <header class="bg-gradient-to-r from-sky-950 via-slate-900 to-indigo-950 text-white border-b border-sky-900/50">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-7 sm:py-9">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-400/20 text-sky-300 text-xs font-semibold mb-3">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-400/20 text-sky-300 text-xs font-semibold mb-2.5">
             <i class="fa-solid fa-feather-pointed"></i> Enseignement du Français · Année Scolaire 2026-2027
           </div>
           <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
             Espace Pédagogique — Madame Lamia
           </h1>
-          <p class="text-sm sm:text-base text-slate-300 mt-1 max-w-2xl">
-            Référentiel des livrets de remédiation, fiches de langue et supports pédagogiques modernisés au format haute fidélité.
+          <p class="text-sm text-slate-300 mt-1">
+            Fiches de remédiation par compétence, leçons de grammaire et supports prêts pour impression.
           </p>
         </div>
         <div class="flex items-center gap-3">
-          <div class="bg-white/10 backdrop-blur-md px-4 py-2.5 rounded-2xl border border-white/10 text-center">
-            <div class="text-xl font-extrabold text-white">4</div>
-            <div class="text-[11px] font-medium text-sky-200 uppercase tracking-wider">Documents</div>
+          <div class="bg-white/10 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10 text-center">
+            <div class="text-xl font-extrabold text-white">6</div>
+            <div class="text-[10px] font-medium text-sky-200 uppercase tracking-wider">Fiches Prêtes</div>
           </div>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- Main Content Grid -->
-  <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
-    <!-- Action Bar -->
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-      <div>
-        <h2 class="text-xl font-bold text-slate-900">Catalogue des Documents</h2>
-        <p class="text-sm text-slate-500">Tous les fichiers sont compilés en PDF vectoriel prêt pour l'impression ou la projection.</p>
-      </div>
-      <div class="flex items-center gap-2">
-        <span class="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-full">
-          <i class="fa-solid fa-circle-check text-[10px]"></i> Version TeX Live 2026 Validée
-        </span>
-      </div>
-    </div>
+  <!-- Main Content -->
+  <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
 
-    <!-- Cards Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      
-        <div class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-200 border border-slate-200/80 flex flex-col justify-between group">
+    <!-- Section 1 : 1ère Année Moyenne (1AM) -->
+    <section>
+      <div class="flex items-center gap-3 pb-3 mb-5 border-b border-slate-200">
+        <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-sky-800 text-white font-bold text-sm">
+          1AM
+        </span>
+        <div>
+          <h2 class="text-lg font-bold text-slate-900">1ère Année Moyenne — Fiches de Remédiation par Compétence</h2>
+          <p class="text-xs text-slate-500">Chaque compétence est un document autonome de 2 pages (Fiche enseignant + Fiche élève découpable).</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        
+        <div class="bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-all duration-200 border border-slate-200 flex flex-col justify-between group">
           <div>
-            <div class="flex items-center justify-between gap-2 mb-3">
-              <span class="inline-flex items-center text-xs font-semibold px-2.5 py-1 rounded-full border bg-blue-100 text-blue-800 border-blue-200">
-                1AM — Remédiation
+            <div class="flex items-center justify-between gap-2 mb-2.5">
+              <span class="inline-flex items-center text-xs font-semibold px-2.5 py-0.5 rounded-full border bg-blue-50 text-blue-700 border-blue-200">
+                1AM · Oral
               </span>
-              <span class="text-xs font-medium text-slate-400">
-                <i class="fa-regular fa-file-lines mr-1"></i>14 pages · 2.12 Mo
+              <span class="text-xs text-slate-400 font-medium">
+                <i class="fa-regular fa-file-pdf mr-1"></i>2 p. · 461 Ko
               </span>
             </div>
-            <h3 class="text-lg font-bold text-slate-900 group-hover:text-sky-700 transition-colors mb-2">
-              Livret de Remédiation Pédagogique (1AM)
-            </h3>
-            <p class="text-sm text-slate-600 line-clamp-3 mb-4">
-              Cahier complet de remédiation : 4 compétences disciplinaires, 14 fiches modernes prêtes à l'impression.
+            <h4 class="text-base font-bold text-slate-900 group-hover:text-sky-800 transition-colors mb-2 leading-snug">
+              Compétence 01 : Compréhension & Expression Orales
+            </h4>
+            <p class="text-xs text-slate-600 leading-relaxed mb-4">
+              Fiche enseignant (thème de l'hygiène et dialogue) + Fiche élève découpable en 2 colonnes A5 avec QCM illustrés.
             </p>
           </div>
-          <div class="pt-4 border-t border-slate-100 flex items-center gap-3">
-            <a href="1AM/remediation_1am.pdf" target="_blank" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-sky-800 text-white text-sm font-semibold hover:bg-sky-900 transition-colors shadow-sm">
-              <i class="fa-solid fa-eye text-xs"></i> Consulter
+          <div class="pt-3 border-t border-slate-100 flex items-center gap-2">
+            <a href="1AM/competence_01_oral.pdf" target="_blank" class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-sky-800 text-white text-xs font-semibold hover:bg-sky-900 transition-colors shadow-sm">
+              <i class="fa-solid fa-eye text-[11px]"></i> Consulter
             </a>
-            <a href="1AM/remediation_1am.pdf" download class="inline-flex items-center justify-center p-2.5 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-colors" title="Télécharger">
-              <i class="fa-solid fa-download"></i>
+            <a href="1AM/competence_01_oral.pdf" download class="inline-flex items-center justify-center p-2 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" title="Télécharger">
+              <i class="fa-solid fa-download text-xs"></i>
             </a>
           </div>
         </div>
         
-        <div class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-200 border border-slate-200/80 flex flex-col justify-between group">
+        <div class="bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-all duration-200 border border-slate-200 flex flex-col justify-between group">
           <div>
-            <div class="flex items-center justify-between gap-2 mb-3">
-              <span class="inline-flex items-center text-xs font-semibold px-2.5 py-1 rounded-full border bg-blue-100 text-blue-800 border-blue-200">
-                1AM — Remédiation
+            <div class="flex items-center justify-between gap-2 mb-2.5">
+              <span class="inline-flex items-center text-xs font-semibold px-2.5 py-0.5 rounded-full border bg-emerald-50 text-emerald-700 border-emerald-200">
+                1AM · Lecture
               </span>
-              <span class="text-xs font-medium text-slate-400">
-                <i class="fa-regular fa-file-lines mr-1"></i>14 pages · 2.12 Mo
+              <span class="text-xs text-slate-400 font-medium">
+                <i class="fa-regular fa-file-pdf mr-1"></i>2 p. · 270 Ko
               </span>
             </div>
-            <h3 class="text-lg font-bold text-slate-900 group-hover:text-sky-700 transition-colors mb-2">
-              Livret de Remédiation Pédagogique (1AM)
-            </h3>
-            <p class="text-sm text-slate-600 line-clamp-3 mb-4">
-              Cahier complet de remédiation : 4 compétences disciplinaires, 14 fiches modernes prêtes à l'impression.
+            <h4 class="text-base font-bold text-slate-900 group-hover:text-sky-800 transition-colors mb-2 leading-snug">
+              Compétence 02 : Lecture & Phonétique
+            </h4>
+            <p class="text-xs text-slate-600 leading-relaxed mb-4">
+              Fiche de lecture expressive (texte de la gazelle) + Planche de 15 vignettes du schéma de la gazelle à découper.
             </p>
           </div>
-          <div class="pt-4 border-t border-slate-100 flex items-center gap-3">
-            <a href="1AM_remediation.pdf" target="_blank" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-sky-800 text-white text-sm font-semibold hover:bg-sky-900 transition-colors shadow-sm">
-              <i class="fa-solid fa-eye text-xs"></i> Consulter
+          <div class="pt-3 border-t border-slate-100 flex items-center gap-2">
+            <a href="1AM/competence_02_lecture.pdf" target="_blank" class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-sky-800 text-white text-xs font-semibold hover:bg-sky-900 transition-colors shadow-sm">
+              <i class="fa-solid fa-eye text-[11px]"></i> Consulter
             </a>
-            <a href="1AM_remediation.pdf" download class="inline-flex items-center justify-center p-2.5 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-colors" title="Télécharger">
-              <i class="fa-solid fa-download"></i>
+            <a href="1AM/competence_02_lecture.pdf" download class="inline-flex items-center justify-center p-2 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" title="Télécharger">
+              <i class="fa-solid fa-download text-xs"></i>
             </a>
           </div>
         </div>
         
-        <div class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-200 border border-slate-200/80 flex flex-col justify-between group">
+        <div class="bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-all duration-200 border border-slate-200 flex flex-col justify-between group">
           <div>
-            <div class="flex items-center justify-between gap-2 mb-3">
-              <span class="inline-flex items-center text-xs font-semibold px-2.5 py-1 rounded-full border bg-teal-100 text-teal-800 border-teal-200">
-                Grammaire & Conjugaison
+            <div class="flex items-center justify-between gap-2 mb-2.5">
+              <span class="inline-flex items-center text-xs font-semibold px-2.5 py-0.5 rounded-full border bg-teal-50 text-teal-700 border-teal-200">
+                1AM · Écrit
               </span>
-              <span class="text-xs font-medium text-slate-400">
-                <i class="fa-regular fa-file-lines mr-1"></i>2 pages · 73.5 Ko
+              <span class="text-xs text-slate-400 font-medium">
+                <i class="fa-regular fa-file-pdf mr-1"></i>2 p. · 924 Ko
               </span>
             </div>
-            <h3 class="text-lg font-bold text-slate-900 group-hover:text-sky-700 transition-colors mb-2">
+            <h4 class="text-base font-bold text-slate-900 group-hover:text-sky-800 transition-colors mb-2 leading-snug">
+              Compétence 03 : Compréhension de l'Écrit
+            </h4>
+            <p class="text-xs text-slate-600 leading-relaxed mb-4">
+              Fiche d'analyse textuelle structurée (Phase 1 : Repérage et axes de lecture + Phase 2 : Activités de consolidation).
+            </p>
+          </div>
+          <div class="pt-3 border-t border-slate-100 flex items-center gap-2">
+            <a href="1AM/competence_03_comprehension_ecrit.pdf" target="_blank" class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-sky-800 text-white text-xs font-semibold hover:bg-sky-900 transition-colors shadow-sm">
+              <i class="fa-solid fa-eye text-[11px]"></i> Consulter
+            </a>
+            <a href="1AM/competence_03_comprehension_ecrit.pdf" download class="inline-flex items-center justify-center p-2 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" title="Télécharger">
+              <i class="fa-solid fa-download text-xs"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-all duration-200 border border-slate-200 flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2.5">
+              <span class="inline-flex items-center text-xs font-semibold px-2.5 py-0.5 rounded-full border bg-amber-50 text-amber-700 border-amber-200">
+                1AM · Production
+              </span>
+              <span class="text-xs text-slate-400 font-medium">
+                <i class="fa-regular fa-file-pdf mr-1"></i>2 p. · 909 Ko
+              </span>
+            </div>
+            <h4 class="text-base font-bold text-slate-900 group-hover:text-sky-800 transition-colors mb-2 leading-snug">
+              Compétence 04 : Production Écrite
+            </h4>
+            <p class="text-xs text-slate-600 leading-relaxed mb-4">
+              Fiche enseignant et critères d'évaluation + Planche de 6 billets de rédaction (Le lion) prêts à découper.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-slate-100 flex items-center gap-2">
+            <a href="1AM/competence_04_production_ecrite.pdf" target="_blank" class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-sky-800 text-white text-xs font-semibold hover:bg-sky-900 transition-colors shadow-sm">
+              <i class="fa-solid fa-eye text-[11px]"></i> Consulter
+            </a>
+            <a href="1AM/competence_04_production_ecrite.pdf" download class="inline-flex items-center justify-center p-2 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" title="Télécharger">
+              <i class="fa-solid fa-download text-xs"></i>
+            </a>
+          </div>
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- Section 2 : Conjugaison & Grammaire -->
+    <section>
+      <div class="flex items-center gap-3 pb-3 mb-5 border-b border-slate-200">
+        <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-purple-800 text-white font-bold text-sm">
+          <i class="fa-solid fa-spell-check text-xs"></i>
+        </span>
+        <div>
+          <h2 class="text-lg font-bold text-slate-900">Grammaire & Conjugaison</h2>
+          <p class="text-xs text-slate-500">Leçons synthétiques, exercices d'application et étiquettes mémo découpables pour les élèves.</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        
+        <div class="bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-all duration-200 border border-slate-200 flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2.5">
+              <span class="inline-flex items-center text-xs font-semibold px-2.5 py-0.5 rounded-full border bg-purple-50 text-purple-700 border-purple-200">
+                Conjugaison · Grammaire
+              </span>
+              <span class="text-xs text-slate-400 font-medium">
+                <i class="fa-regular fa-file-pdf mr-1"></i>2 p. · 74 Ko
+              </span>
+            </div>
+            <h4 class="text-base font-bold text-slate-900 group-hover:text-sky-800 transition-colors mb-2 leading-snug">
               Les Verbes ÊTRE et AVOIR au Présent
-            </h3>
-            <p class="text-sm text-slate-600 line-clamp-3 mb-4">
-              Fiche pédagogique complète avec activités d'entraînement + planche de 12 étiquettes mémo découpables pour les élèves.
+            </h4>
+            <p class="text-xs text-slate-600 leading-relaxed mb-4">
+              Fiche de cours avec 4 activités d'application + Planche plein format A4 de 8 grandes étiquettes mémo découpables pour les élèves.
             </p>
           </div>
-          <div class="pt-4 border-t border-slate-100 flex items-center gap-3">
-            <a href="grammaire/verbe_etre_avoir.pdf" target="_blank" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-sky-800 text-white text-sm font-semibold hover:bg-sky-900 transition-colors shadow-sm">
-              <i class="fa-solid fa-eye text-xs"></i> Consulter
+          <div class="pt-3 border-t border-slate-100 flex items-center gap-2">
+            <a href="grammaire/verbe_etre_avoir.pdf" target="_blank" class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-sky-800 text-white text-xs font-semibold hover:bg-sky-900 transition-colors shadow-sm">
+              <i class="fa-solid fa-eye text-[11px]"></i> Consulter
             </a>
-            <a href="grammaire/verbe_etre_avoir.pdf" download class="inline-flex items-center justify-center p-2.5 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-colors" title="Télécharger">
-              <i class="fa-solid fa-download"></i>
+            <a href="grammaire/verbe_etre_avoir.pdf" download class="inline-flex items-center justify-center p-2 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" title="Télécharger">
+              <i class="fa-solid fa-download text-xs"></i>
             </a>
           </div>
         </div>
         
-        <div class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-200 border border-slate-200/80 flex flex-col justify-between group">
+      </div>
+    </section>
+
+    <!-- Section 3 : Modèles Pédagogiques -->
+    <section>
+      <div class="flex items-center gap-3 pb-3 mb-5 border-b border-slate-200">
+        <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-slate-700 text-white font-bold text-sm">
+          <i class="fa-solid fa-shapes text-xs"></i>
+        </span>
+        <div>
+          <h2 class="text-lg font-bold text-slate-900">Gabarits & Modèles (Templates)</h2>
+          <p class="text-xs text-slate-500">Boîte à outils et modèle standardisé pour composer de nouvelles fiches d'activités.</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        
+        <div class="bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-all duration-200 border border-slate-200 flex flex-col justify-between group">
           <div>
-            <div class="flex items-center justify-between gap-2 mb-3">
-              <span class="inline-flex items-center text-xs font-semibold px-2.5 py-1 rounded-full border bg-amber-100 text-amber-800 border-amber-200">
-                Modèle Reutilisable
+            <div class="flex items-center justify-between gap-2 mb-2.5">
+              <span class="inline-flex items-center text-xs font-semibold px-2.5 py-0.5 rounded-full border bg-slate-100 text-slate-700 border-slate-300">
+                Gabarit Enseignant
               </span>
-              <span class="text-xs font-medium text-slate-400">
-                <i class="fa-regular fa-file-lines mr-1"></i>2 pages · 84.5 Ko
+              <span class="text-xs text-slate-400 font-medium">
+                <i class="fa-regular fa-file-pdf mr-1"></i>2 p. · 86 Ko
               </span>
             </div>
-            <h3 class="text-lg font-bold text-slate-900 group-hover:text-sky-700 transition-colors mb-2">
-              Gabarit Pédagogique Type (Template)
-            </h3>
-            <p class="text-sm text-slate-600 line-clamp-3 mb-4">
-              Modèle vierge structuré de 2 pages avec tous les composants (objectifs, activités, QCM, auto-évaluation).
+            <h4 class="text-base font-bold text-slate-900 group-hover:text-sky-800 transition-colors mb-2 leading-snug">
+              Gabarit Type de Fiche Pédagogique
+            </h4>
+            <p class="text-xs text-slate-600 leading-relaxed mb-4">
+              Modèle standard 2 pages avec en-tête métadonnées, barre modalité/support, mémo, QCM et grille d'auto-évaluation.
             </p>
           </div>
-          <div class="pt-4 border-t border-slate-100 flex items-center gap-3">
-            <a href="templates/course_template.pdf" target="_blank" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-sky-800 text-white text-sm font-semibold hover:bg-sky-900 transition-colors shadow-sm">
-              <i class="fa-solid fa-eye text-xs"></i> Consulter
+          <div class="pt-3 border-t border-slate-100 flex items-center gap-2">
+            <a href="templates/course_template.pdf" target="_blank" class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-sky-800 text-white text-xs font-semibold hover:bg-sky-900 transition-colors shadow-sm">
+              <i class="fa-solid fa-eye text-[11px]"></i> Consulter
             </a>
-            <a href="templates/course_template.pdf" download class="inline-flex items-center justify-center p-2.5 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-colors" title="Télécharger">
-              <i class="fa-solid fa-download"></i>
+            <a href="templates/course_template.pdf" download class="inline-flex items-center justify-center p-2 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" title="Télécharger">
+              <i class="fa-solid fa-download text-xs"></i>
             </a>
           </div>
         </div>
         
-    </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- Footer -->
-  <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
+  <footer class="bg-white border-t border-slate-200 py-5 text-center text-xs text-slate-500">
     <div class="max-w-6xl mx-auto px-4">
-      <p>Système de Publication Pédagogique Lamia · LaTeX & Lamia-Pedagogy Design System · Généré automatiquement</p>
+      <p>Système de Publication Pédagogique Lamia · LaTeX & Lamia-Pedagogy Design System · Mis à jour automatiquement</p>
     </div>
   </footer>
 

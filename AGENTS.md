@@ -54,6 +54,7 @@ The `lamia-pedagogy` package provides:
 | :--- | :--- |
 | `\ficheHeader{Durée}{Date}{Niveau}{Année}` | Standard metadata header bar with duration, date, level, and school year. |
 | `\competenceBanner{<Icon> <Title>}` | Full-width navy title banner for the current competence/domain. |
+| `\modaliteSupportBar{Modalité}{Support}` | Compact dual banner indicating student work modality and pedagogical support material. |
 | `\badge[color]{Text}` | Rounded badge pill (colors: `primary`, `secondary`, `accent`, `emerald`, `amber`, `softred`). |
 | `\qcmCircle` | TikZ circle checkbox for student tick answers in multiple-choice questions. |
 | `\cardOptTwo{a}{b}` | Standardized 2-choice horizontal QCM grid. |
