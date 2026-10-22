@@ -38,8 +38,32 @@ $(DIST_DIR)/%.pdf: $(SRC_DIR)/%.tex $(CACHE_DIR) $(DIST_DIR) sty/lamia-pedagogy.
 1am: $(CACHE_DIR) $(DIST_DIR) $(1AM_PDFS)
 	@echo "1AM Competence documents up to date."
 
+PASSWORD ?= karim2001
+
 portal:
 	@if [ -f portal/generate_index.py ]; then python3 portal/generate_index.py; fi
+	@$(MAKE) encrypt
+
+encrypt:
+	@echo "--> Encrypting dist/index.html with StatiCrypt (Password: $(PASSWORD))..."
+	@npx --yes staticrypt portal/index.html \
+		-p "$(PASSWORD)" \
+		-d ./$(DIST_DIR) \
+		--short \
+		--remember 30 \
+		--template-title "Espace Pédagogique — Madame Lamia" \
+		--template-instructions "Ressources pédagogiques réservées aux élèves et enseignants autorisés." \
+		--template-placeholder "Mot de passe d'accès" \
+		--template-button "Accéder aux cours" \
+		--template-remember "Se souvenir de moi sur cet appareil (30 jours)" \
+		--template-error "Mot de passe incorrect !" \
+		--template-color-primary "#182b49" \
+		--template-color-secondary "#0d9488"
+	@echo "    [OK] Encrypted portal written to $(DIST_DIR)/index.html"
+
+serve:
+	@echo "Serving $(DIST_DIR) at http://localhost:8080 (Press Ctrl+C to stop)..."
+	@python3 -m http.server 8080 -d $(DIST_DIR)
 
 clean:
 	@echo "Cleaning temporary build cache..."
